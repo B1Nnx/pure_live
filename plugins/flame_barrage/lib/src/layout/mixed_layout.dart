@@ -122,11 +122,13 @@ class MixedLayout {
       if (fragment is TextFragment) {
         final textCacheKey =
             '${fragment.text}|${config.fontSize}|$colorValue|$showStroke|${config.fontWeight}|${config.fontStyle}|'
-            '${config.fontFamily}|${config.letterSpacing}|${config.showShadow}|${effectiveShadowColor.toARGB32()}|'
+            '${config.fontFamily}|${config.fontFamilyFallback.join(',')}|${config.letterSpacing}|'
+            '${config.showShadow}|${effectiveShadowColor.toARGB32()}|'
             '${config.shadowBlur}|${config.shadowOffset.dx}|${config.shadowOffset.dy}';
         final strokeCacheKey =
             '${fragment.text}|$fontSize|${effectiveStrokeColor.toARGB32()}|${config.strokeWidth}|'
-            '${config.fontWeight}|${config.fontStyle}|${config.fontFamily}|${config.letterSpacing}';
+            '${config.fontWeight}|${config.fontStyle}|${config.fontFamily}|'
+            '${config.fontFamilyFallback.join(',')}|${config.letterSpacing}';
 
         final paragraph = _buildParagraph(fragment.text, config, textCacheKey, isStroke: false);
         final strokeParagraph = config.showStroke
@@ -295,6 +297,7 @@ class MixedLayout {
           fontWeight: config.fontWeight,
           fontStyle: config.fontStyle,
           fontFamily: config.fontFamily,
+          fontFamilyFallback: config.fontFamilyFallback,
           letterSpacing: config.letterSpacing,
         ),
       );
@@ -310,6 +313,7 @@ class MixedLayout {
           fontWeight: config.fontWeight,
           fontStyle: config.fontStyle,
           fontFamily: config.fontFamily,
+          fontFamilyFallback: config.fontFamilyFallback,
           letterSpacing: config.letterSpacing,
           shadows: config.showShadow
               ? <ui.Shadow>[
@@ -355,6 +359,7 @@ class MixedLayout {
     hash = 37 * hash + config.shadowBlur.hashCode;
     hash = 37 * hash + config.shadowOffset.hashCode;
     hash = 37 * hash + config.fontFamily.hashCode;
+    hash = 37 * hash + Object.hashAll(config.fontFamilyFallback);
 
     final len = fragments.length;
     for (int i = 0; i < len; i++) {

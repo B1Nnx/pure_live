@@ -759,6 +759,7 @@ class DanmakuViewer extends StatelessWidget {
           maxPendingCount: 120,
           maxPendingAge: const Duration(seconds: 5),
           fontFamily: controller.danmakuFontFamilyName.value,
+          fontFamilyFallback: bundledEmojiFontFallback,
           trackHeight: (controller.danmakuFontSize.value * 1.55).clamp(24.0, 64.0).toDouble(),
           emojiSize: (controller.danmakuFontSize.value * 1.3).clamp(16.0, 48.0).toDouble(),
           pictureCacheMaxSize: 96,
@@ -1920,6 +1921,7 @@ class _FullscreenLocalDanmakuComposerState extends State<FullscreenLocalDanmakuC
             fontSize: 13,
             fontWeight: FontWeight(localStyle.fontWeight),
             fontFamily: localStyle.fontFamily,
+            fontFamilyFallback: bundledEmojiFontFallback,
             fontStyle: localStyle.italic ? FontStyle.italic : FontStyle.normal,
             letterSpacing: localStyle.letterSpacing,
             shadows: localStyle.showShadow

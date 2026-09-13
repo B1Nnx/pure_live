@@ -957,6 +957,8 @@ class VideoController with ChangeNotifier implements DanmakuSettingsBinding {
         maxVisibleCount: 48,
         maxPendingCount: 120,
         maxPendingAge: const Duration(seconds: 5),
+        fontFamily: danmakuFontFamilyName.value,
+        fontFamilyFallback: bundledEmojiFontFallback,
         barragePoolMaxSize: 72,
         pictureCacheMaxSize: 96,
         textCacheMaxSize: 320,

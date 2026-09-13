@@ -503,7 +503,11 @@ class DanmakuItem extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: "${danmaku.userName}: ",
-                            style: AppTextStyles.t14.copyWith(fontWeight: FontWeight.w700, color: textColor),
+                            style: AppTextStyles.t14.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: textColor,
+                              fontFamilyFallback: bundledEmojiFontFallback,
+                            ),
                           ),
                           TextSpan(
                             children: parseEmojis(danmaku.message, AppTextStyles.t14.fontSize!, textColor),
@@ -511,6 +515,7 @@ class DanmakuItem extends StatelessWidget {
                               height: 1.45,
                               fontWeight: FontWeight.w500,
                               color: textColor,
+                              fontFamilyFallback: bundledEmojiFontFallback,
                             ),
                           ),
                         ],
@@ -593,7 +598,11 @@ List<InlineSpan> parseEmojis(String text, double size, Color color) {
 
   final spans = <InlineSpan>[];
 
-  final style = TextStyle(fontSize: size, color: color);
+  final style = TextStyle(
+    fontSize: size,
+    color: color,
+    fontFamilyFallback: bundledEmojiFontFallback,
+  );
 
   final emojiSize = size * 1.25;
 

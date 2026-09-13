@@ -596,6 +596,7 @@ class BarrageEngine extends FlameGame with TapCallbacks {
       (item.textColor ?? _config.textColor).toARGB32(),
       item.emojiSize ?? _config.emojiSize,
       item.fontFamily ?? _config.fontFamily ?? '',
+      _config.fontFamilyFallback.join(','),
       item.letterSpacing ?? _config.letterSpacing,
       item.showStroke ?? _config.showStroke,
       item.strokeWidth ?? _config.strokeWidth,

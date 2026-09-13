@@ -294,6 +294,9 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/icons/CustomIcons.ttf
+    - family: PureLiveEmoji
+      fonts:
+        - asset: assets/fonts/emoji/NotoColorEmoji.ttf
 
 # FFmpeg配置
 ffmpeg_kit_extended_config:

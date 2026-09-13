@@ -1223,6 +1223,7 @@ BarrageConfig _buildBarrageConfig() {
     maxPendingCount: 120,
     maxPendingAge: const Duration(seconds: 5),
     fontFamily: settings.danmakuFontFamilyName.v,
+    fontFamilyFallback: bundledEmojiFontFallback,
     trackHeight: (settings.danmakuFontSize.v * 1.55).clamp(24.0, 64.0).toDouble(),
     emojiSize: (settings.danmakuFontSize.v * 1.3).clamp(16.0, 48.0).toDouble(),
     pictureCacheMaxSize: 96,

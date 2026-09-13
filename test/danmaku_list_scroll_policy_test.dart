@@ -118,4 +118,18 @@ void main() {
     expect(emojiCache.containsKey('unique live message 0'), isFalse);
     expect(emojiCache.containsKey('unique live message ${emojiTokenCacheCapacity + 199}'), isTrue);
   });
+
+  test('unicode emoji text keeps the bundled font fallback', () {
+    final spans = parseEmojis(
+      'Unicode emoji: 😂 ❤️ 👍🏽 🇨🇳',
+      14,
+      Colors.white,
+    );
+    final textSpans = spans.whereType<TextSpan>();
+
+    expect(textSpans, isNotEmpty);
+    for (final span in textSpans) {
+      expect(span.style?.fontFamilyFallback, const <String>['PureLiveEmoji']);
+    }
+  });
 }

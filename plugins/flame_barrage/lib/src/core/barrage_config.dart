@@ -9,6 +9,7 @@ class BarrageConfig {
     this.fontWeight = FontWeight.w500,
     this.fontStyle = FontStyle.normal,
     this.fontFamily,
+    this.fontFamilyFallback = const <String>[],
     this.letterSpacing = 0,
     this.textColor = Colors.white,
     this.strokeColor = Colors.black,
@@ -133,14 +134,18 @@ class BarrageConfig {
   /// Computes the fixed duration length metric in milliseconds.
   int get fixedDurationMs => fixedDuration.inMilliseconds;
 
-  /// fontFamily
+  /// Primary font family used for text fragments.
   final String? fontFamily;
+
+  /// Ordered font families used when the primary font lacks a glyph.
+  final List<String> fontFamilyFallback;
 
   BarrageConfig copyWith({
     double? fontSize,
     FontWeight? fontWeight,
     FontStyle? fontStyle,
     String? fontFamily,
+    List<String>? fontFamilyFallback,
     double? letterSpacing,
     Color? textColor,
     Color? strokeColor,
@@ -179,6 +184,7 @@ class BarrageConfig {
       fontWeight: fontWeight ?? this.fontWeight,
       fontStyle: fontStyle ?? this.fontStyle,
       fontFamily: fontFamily ?? this.fontFamily,
+      fontFamilyFallback: fontFamilyFallback ?? this.fontFamilyFallback,
       letterSpacing: letterSpacing ?? this.letterSpacing,
       textColor: textColor ?? this.textColor,
       strokeColor: strokeColor ?? this.strokeColor,
@@ -231,6 +237,7 @@ class BarrageConfig {
         other.area == area &&
         other.topAreaDistance == topAreaDistance &&
         other.fontFamily == fontFamily &&
+        listEquals(other.fontFamilyFallback, fontFamilyFallback) &&
         other.bottomAreaDistance == bottomAreaDistance &&
         other.safeArea == safeArea &&
         other.fixedDuration == fixedDuration &&
@@ -272,6 +279,7 @@ class BarrageConfig {
       fixedDuration,
       fps,
       fontFamily,
+      Object.hashAll(fontFamilyFallback),
       trackHeight,
       emojiSize,
       maxVisibleCount,

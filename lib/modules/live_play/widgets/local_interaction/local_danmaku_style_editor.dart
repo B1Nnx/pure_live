@@ -186,6 +186,7 @@ class _DanmakuPreview extends StatelessWidget {
         fontSize: previewStyle.fontSize,
         fontWeight: FontWeight(previewStyle.fontWeight),
         fontFamily: previewStyle.fontFamily,
+        fontFamilyFallback: bundledEmojiFontFallback,
         fontStyle: previewStyle.italic ? FontStyle.italic : FontStyle.normal,
         letterSpacing: previewStyle.letterSpacing,
         shadows: previewShadows.isEmpty ? null : previewShadows,

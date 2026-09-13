@@ -155,6 +155,31 @@ void main() {
     expect(layout.cacheCount, 2);
   });
 
+  test('font fallback participates in config and barrage cache identity', () {
+    const fallback = <String>['PureLiveEmoji'];
+    const base = BarrageConfig();
+    const withFallback = BarrageConfig(fontFamilyFallback: fallback);
+
+    expect(withFallback.copyWith().fontFamilyFallback, fallback);
+    expect(withFallback, isNot(base));
+    expect(withFallback.hashCode, isNot(base.hashCode));
+
+    final engine = BarrageEngine(config: base, emojiAtlas: EmojiAtlas.instance);
+    const item = BarrageItem(content: 'Unicode emoji: 😂 ❤️ 👍🏽 🇨🇳');
+    final baseKey = engine.buildCacheKey(item);
+    engine.updateConfig(withFallback);
+    final fallbackKey = engine.buildCacheKey(item);
+
+    final parser = RichParser(atlas: EmojiAtlas.instance, maxCacheSize: 8);
+    final layout = MixedLayout(atlas: EmojiAtlas.instance, maxTextCacheSize: 8);
+    final fragments = parser.parse(item.content);
+    layout.layout(fragments, item: item, config: base);
+    layout.layout(fragments, item: item, config: withFallback);
+
+    expect(fallbackKey, isNot(baseKey));
+    expect(layout.cacheCount, 2);
+  });
+
   test('low-opacity barrage keeps a monotonic contrast-preserving outline', () {
     expect(resolveBarrageStrokeOpacity(-1), 0);
     expect(resolveBarrageStrokeOpacity(0), 0);

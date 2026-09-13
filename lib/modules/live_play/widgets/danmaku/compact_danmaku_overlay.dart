@@ -60,6 +60,7 @@ class CompactDanmakuOverlay extends StatelessWidget {
                   fontSize: metrics.fontSize,
                   fontWeight: FontWeight(typography.fontWeight),
                   fontFamily: typography.fontFamily,
+                  fontFamilyFallback: bundledEmojiFontFallback,
                   area: area,
                   baseSpeed: metrics.baseSpeed,
                   opacity: opacity,
